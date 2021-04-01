@@ -1,0 +1,154 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+*, ::before, ::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-top-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+html, body {
+    line-height: 1;
+    overflow: hidden;
+    height: 100%;
+}
+
+html {
+    background-color: #fff;
+    color: #212;
+    font-size: 100px;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+body {
+    margin: 0;
+    font-size: 0.14em;
+    line-height: 1.5;
+    font-family: PingFangSC-Regular, "Hiragino Sans GB", sans-serif;
+}
+
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    text-align: left;
+}
+
+ul,
+ol,
+menu {
+    list-style: none;
+}
+
+fieldset,
+img {
+    border: 0;
+    vertical-align: middle;
+}
+
+audio,
+canvas,
+video {
+    display: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input,
+textarea,
+button,
+select,
+summary,
+a {
+    outline: 0 none;
+}
+
+input,
+textarea,
+button,
+select {
+    color: inherit;
+}
+
+input:disabled,
+button:disabled,
+textarea:disabled,
+select:disabled {
+    opacity: 1;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+mark {
+    background-color: #221122;
+}
+
+#app {
+    height: 100%;
+}
+
+font-face {
+    font-family: yofont !important;
+    src:url("//ss.");
+}
+
+
+.movie-ico {
+    font-family:iconfont-nav;
+    font-style:normal;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    vertical-align:middle;
+}
+
