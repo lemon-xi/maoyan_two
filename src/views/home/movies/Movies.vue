@@ -2,46 +2,44 @@
   <main>
     <nav class="movie-nav">
       <ul>
-        <li>
+        <li @click="handleCityClick">
           <span>北京</span>
           <b class="movie-ico">&#xe65b;</b>
         </li>
         <li>
-          <span class="active">热映</span>
-          <span>待映</span>
+          <router-link tag="span" active-class="active" to="/home/movies/intheaters">热映</router-link>
+          <router-link tag="span" active-class="active" to="/home/movies/comingsoon" >待映</router-link>
         </li>
         <li class="movie-ico">&#xe616;</li>
       </ul>
     </nav>
-    <div class="movie-list">
-      <MovieList></MovieList>
-    </div>
+    <router-view :movie-list="movieList"></router-view>
   </main>
 </template>
 
 <script>
-import axios from 'axios'
-import MovieList from "@/components/MovieList";
-
 export default {
   data() {
     return {
       movieList: []
     }
   },
-  components: {
-    MovieList
+  methods:{
+    handleCityClick(){
+      this.$router.push('/citypick')
+    }
   },
-
   async mounted() {
-    let res = await axios.get('/mmdb/movie/v2/list/hot.json', {
-      params: {
-        limit: 10,
+    let result = await this.$http.get({
+      url:'/movie/v2/list/hot.json',
+      params:{
+        limit: 12,
         offset: 0,
         ct: '北京'
       }
     })
-    console.log(res)
+    // console.log(result)
+    this.movieList = result.data.hot
   }
 }
 </script>
@@ -50,14 +48,16 @@ export default {
 @import "~@/assets/stylus/icon.styl"
 //主体
 main
-  height 100%
   flex 1
-
+  overflow hidden
+  display flex
+  flex-direction column
   .movie-nav
     > ul
       border1px(0 0 1px 0)
       display flex
       height .44rem
+
 
       li:first-child
         flex 100
@@ -99,4 +99,7 @@ main
         text-align center
         color #cd4c42
 
+  .movie-list
+      flex 1
+      overflow-y scroll
 </style>

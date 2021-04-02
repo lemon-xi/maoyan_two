@@ -2,21 +2,21 @@
   <div>
     <!--    头部-->
     <header>猫眼电影</header>
-    <Movies></Movies>
+    <router-view></router-view>
     <nav class="tabbar">
       <ul>
-        <li class="active movie-ico">
+        <router-link class="movie-ico" active-class="active" tag="li" to="/home/movies">
           <b>&#xe7d3;</b>
           <span>电影</span>
-        </li>
-        <li class="movie-ico">
+        </router-link>
+        <router-link class="movie-ico" active-class="active" tag="li" to="/home/theaters">
           <b> &#xe8c0;</b>
-          <span>搜索</span>
-        </li>
-        <li class="movie-ico">
+          <span>影院</span>
+        </router-link>
+        <router-link class="movie-ico" active-class="active" tag="li" to="/home/profile">
           <b> &#xe60e;</b>
           <span>个人</span>
-        </li>
+        </router-link>
       </ul>
     </nav>
 
@@ -27,11 +27,6 @@
 <script>
 import Movies from "@/views/home/movies/Movies";
 export default {
-  data() {
-    return {
-      msg: 'helo'
-    }
-  },
   components:{
     Movies
   }

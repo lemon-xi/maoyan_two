@@ -1,22 +1,63 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+
+//组件
+import Home from "../views/home/Home";
+import Profile from "../views/home/profile/Profile";
+import Movies from "../views/home/movies/Movies";
+import CityPick from "../views/city/CityPick";
+import Theaters from "../views/home/theaters/Theaters";
+import InThraters from "../views/home/movies/InThraters";
+import ComingSoon from "../views/home/movies/ComingSoon";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect:'/home'
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/home',
+    name: 'home',
+    component: Home,
+    redirect: '/home/movies',
+    children:[
+        {
+        path:'movies',
+        name:'movies',
+        component:Movies,
+        redirect: '/home/movies/intheaters',
+        children:[
+          {
+            path:'intheaters',
+            name:'intheaters',
+            component:InThraters
+          },
+          {
+            path:'comingsoon',
+            name:'comingsoon',
+            component:ComingSoon
+          }
+        ]
+
+      },
+      {
+        path:'theaters',
+        name:'theaters',
+        component:Theaters
+      },
+      {
+        path:'profile',
+        name:'profile',
+        component:Profile
+      }
+    ]
+  },
+  {
+    path: '/citypick',
+     name: 'citypick',
+    component: CityPick
   }
 ]
 
