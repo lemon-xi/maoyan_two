@@ -8,39 +8,98 @@
         </li>
         <li>
           <router-link tag="span" active-class="active" to="/home/movies/intheaters">热映</router-link>
-          <router-link tag="span" active-class="active" to="/home/movies/comingsoon" >待映</router-link>
+          <router-link tag="span" active-class="active" to="/home/movies/comingsoon">待映</router-link>
         </li>
         <li class="movie-ico">&#xe616;</li>
       </ul>
     </nav>
-    <router-view :movie-list="movieList"></router-view>
+    <section class="movie-list">
+      <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+        <van-list
+            v-model="loading"
+            :finished="finished"
+            finished-text="没有更多了"
+            @load="onLoad"
+        >
+          <router-view :movie-list="movieList"></router-view>
+        </van-list>
+      </van-pull-refresh>
+    </section>
   </main>
 </template>
 
 <script>
+import Vue from 'vue';
+import {List, PullRefresh, Skeleton} from 'vant';
+
+Vue.use(List).use(PullRefresh).use(Skeleton);
 export default {
   data() {
     return {
-      movieList: []
-    }
-  },
-  methods:{
-    handleCityClick(){
-      this.$router.push('/citypick')
+      movieList: [],
+      refreshing: false,
+      loading: false,
+      finished: false,
     }
   },
   async mounted() {
-    let result = await this.$http.get({
-      url:'/movie/v2/list/hot.json',
-      params:{
-        limit: 12,
-        offset: 0,
-        ct: '北京'
+    await this.loadData()
+  },
+  created() {
+    this.hasMore = false
+    this.limit = 12
+    this.ct = '北京'
+    this.offset = 0
+  },
+  methods: {
+    handleCityClick() {
+      this.$router.push('/citypick')
+    },
+    async loadData() {
+      let result = await this.$http.get({
+        url: '/movie/v2/list/hot.json',
+        params: {
+          limit: this.limit,
+          offset: this.offset,
+          ct: this.ct
+        }
+      })
+      // console.log(result)
+      let {hot, paging: {hasMore}} = result.data
+      this.movieList = [...this.movieList, ...hot]
+      this.hasMore = hasMore
+    },
+
+    async onLoad() {
+      if (this.refreshing) {
+        this.movieList = [];
+        this.refreshing = false;
       }
-    })
-    // console.log(result)
-    this.movieList = result.data.hot
-  }
+
+      await this.loadData()
+      this.loading = false
+      //console.log(this.hasMore)
+      if (!this.hasMore) {
+        this.finished = true
+      }
+
+      this.offset += this.limit
+      //console.log(this.offset)
+
+    },
+    onRefresh() {
+      // 清空列表数据
+      this.finished = false;
+      this.offset = 0;
+
+      // 重新加载数据
+      // 将 loading 设置为 true，表示处于加载状态
+      this.loading = true;
+      this.onLoad();
+    },
+  },
+
+
 }
 </script>
 
@@ -52,12 +111,12 @@ main
   overflow hidden
   display flex
   flex-direction column
+
   .movie-nav
     > ul
       border1px(0 0 1px 0)
       display flex
       height .44rem
-
 
       li:first-child
         flex 100
@@ -100,6 +159,9 @@ main
         color #cd4c42
 
   .movie-list
-      flex 1
-      overflow-y scroll
+    flex 1
+    overflow-y scroll
+
+    .showSkeleton
+      margin-top .1rem
 </style>

@@ -7,7 +7,7 @@ import Profile from "../views/home/profile/Profile";
 import Movies from "../views/home/movies/Movies";
 import CityPick from "../views/city/CityPick";
 import Theaters from "../views/home/theaters/Theaters";
-import InThraters from "../views/home/movies/InThraters";
+import InTheaters from "../views/home/movies/InTheaters";
 import ComingSoon from "../views/home/movies/ComingSoon";
 
 Vue.use(VueRouter)
@@ -32,7 +32,7 @@ const routes = [
           {
             path:'intheaters',
             name:'intheaters',
-            component:InThraters
+            component:InTheaters
           },
           {
             path:'comingsoon',
