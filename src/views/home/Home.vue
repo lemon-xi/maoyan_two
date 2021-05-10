@@ -1,7 +1,7 @@
 <template>
   <div class="m-home">
     <!--    头部-->
-    <header>猫眼电影</header>
+    <header>猫猫电影</header>
     <router-view></router-view>
     <nav class="tabbar">
       <van-tabbar v-model="active" active-color="#cd4c42" inactive-color="#666" route>
@@ -11,13 +11,13 @@
             <van-icon class-prefix="iconfont" name="movie" />
           </template>
         </van-tabbar-item>
-        <van-tabbar-item icon="search" to="/home/theaters">
+        <van-tabbar-item  to="/home/theaters">
           <span>影院</span>
           <template #icon="props">
             <van-icon class-prefix="iconfont" name="theater" />
           </template>
         </van-tabbar-item>
-        <van-tabbar-item icon="setting-o" to="/home/profile">
+        <van-tabbar-item  to="/home/profile">
           <span>我的</span>
           <template #icon="props">
             <van-icon class-prefix="iconfont" name="profile" />

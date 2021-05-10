@@ -40,6 +40,9 @@ export default {
       refreshing: false,
       loading: false,
       finished: false,
+      ct:'北京',
+      ci: '1',
+      url:'/movie/v2/list/hot.json'
     }
   },
   async mounted() {
@@ -48,7 +51,6 @@ export default {
   created() {
     this.hasMore = false
     this.limit = 12
-    this.ct = '北京'
     this.offset = 0
   },
   methods: {
@@ -57,7 +59,7 @@ export default {
     },
     async loadData() {
       let result = await this.$http.get({
-        url: '/movie/v2/list/hot.json',
+        url: this.url,
         params: {
           limit: this.limit,
           offset: this.offset,
@@ -65,9 +67,13 @@ export default {
         }
       })
       // console.log(result)
-      let {hot, paging: {hasMore}} = result.data
-      this.movieList = [...this.movieList, ...hot]
+      let {hot,coming, paging: {hasMore}} = result.data
+      this.movieList = [...this.movieList, ...hot,...coming]
       this.hasMore = hasMore
+
+      
+
+
     },
 
     async onLoad() {
@@ -97,8 +103,21 @@ export default {
       this.loading = true;
       this.onLoad();
     },
+    
   },
-
+    watch: {
+      $route:{
+        handler(route){
+          if(route.name == "intheaters"){
+            this.url = '/movie/v2/list/hot.json'
+          }else{
+            this.url = '/movie/v1/list/wish/order/coming.json'
+          }
+          this.onRefresh()
+        },
+        immediate:true
+      }
+    },
 
 }
 </script>

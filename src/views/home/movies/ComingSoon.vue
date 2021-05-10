@@ -1,7 +1,7 @@
 <template>
   <div class="movie-list">
     <div>most ss</div>
-<!--    <MovieList :movie-list="movieList"></MovieList>-->
+    <MovieList :movie-list="movieList"></MovieList>
   </div>
 </template>
 
