@@ -16,4 +16,5 @@ npm run build
 
 ### Customize configuration
 基于vue仿猫眼电影
-
+展示图：
+https://github.com/lemon-xi/picture/blob/master/maoyan/city.png
