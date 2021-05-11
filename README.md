@@ -1,5 +1,4 @@
 # maoyan_two
-
 ## Project setup
 ```
 npm install
@@ -16,4 +15,5 @@ npm run build
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+基于vue仿猫眼电影
+
