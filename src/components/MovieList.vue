@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <van-skeleton
+    <van-skeleton 
         class="showSkeleton"
         avatar-shape="square"
         avatar-size="64"
@@ -9,6 +9,7 @@
         :animate="animate"
         :loading="showSkeleton"
         v-for="mv in movieList"
+        :key="mv.nm"
     >
       <li>
         <div class="movie-img">

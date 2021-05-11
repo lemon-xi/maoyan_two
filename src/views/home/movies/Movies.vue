@@ -3,7 +3,7 @@
     <nav class="movie-nav">
       <ul>
         <li @click="handleCityClick">
-          <span>北京</span>
+          <span>{{city.name}}</span>
           <b class="movie-ico">&#xe65b;</b>
         </li>
         <li>
@@ -31,6 +31,7 @@
 <script>
 import Vue from 'vue';
 import {List, PullRefresh, Skeleton} from 'vant';
+import {mapState} from 'vuex'
 
 Vue.use(List).use(PullRefresh).use(Skeleton);
 export default {
@@ -40,10 +41,11 @@ export default {
       refreshing: false,
       loading: false,
       finished: false,
-      ct:'北京',
-      ci: '1',
       url:'/movie/v2/list/hot.json'
     }
+  },
+  computed:{
+      ...mapState(['city'])
   },
   async mounted() {
     await this.loadData()
@@ -63,17 +65,14 @@ export default {
         params: {
           limit: this.limit,
           offset: this.offset,
-          ct: this.ct
+          ct: this.city.name,
+          ci: this.city.id
         }
       })
       // console.log(result)
       let {hot,coming, paging: {hasMore}} = result.data
       this.movieList = [...this.movieList, ...hot,...coming]
       this.hasMore = hasMore
-
-      
-
-
     },
 
     async onLoad() {
@@ -109,9 +108,9 @@ export default {
       $route:{
         handler(route){
           if(route.name == "intheaters"){
-            this.url = '/movie/v2/list/hot.json'
+            this.url = 'mmdb/movie/v2/list/hot.json'
           }else{
-            this.url = '/movie/v1/list/wish/order/coming.json'
+            this.url = 'mmdb/movie/v1/list/wish/order/coming.json'
           }
           this.onRefresh()
         },

@@ -12,8 +12,17 @@ module.exports = {
             '/mmdb': {
                 target: 'https://wx.maoyan.com',
                 changeOrigin: true, //开启跨域
+            },
+            '/ajax': {
+                target: 'https://m.maoyan.com',
+                changeOrigin: true, //开启跨域
             }
         }
+        // 'api':{
+        //     target: 'https://localhost:',
+        //     changeOrigin: true, //开启跨域
+
+        // }
 
     }
 

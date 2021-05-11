@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vant/weapp": "^1.6.8",
+    "animate.css": "^4.1.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "jshint": "^2.12.0",

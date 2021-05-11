@@ -2,7 +2,10 @@
   <div class="m-home">
     <!--    头部-->
     <header>猫猫电影</header>
+    <transition>
+
     <router-view></router-view>
+    </transition>
     <nav class="tabbar">
       <van-tabbar v-model="active" active-color="#cd4c42" inactive-color="#666" route>
         <van-tabbar-item to="/home/movies/intheaters">
